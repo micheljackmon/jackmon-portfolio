@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jackmon | 模型·动画·UI·视频制作</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="logo">JACKMON</div>
+        <nav class="nav">
+            <a href="#model">模型</a>
+            <a href="#animate">动画</a>
+            <a href="#ui">UI</a>
+            <a href="#video">视频</a>
+            <a href="#contact">联系我</a>
+            <a href="#message">留言</a>
+        </nav>
+    </header>
+
+    <!-- 欢迎区域 -->
+    <section class="hero">
+        <h1>你好，我是 Jackmon</h1>
+        <p class="welcome">专注高品质 模型 / 动画 / UI / 视频制作 接单服务</p>
+        <p class="thanks">感谢你访问我的作品网站，期待与你合作！</p>
+    </section>
+
+    <!-- 模型作品 -->
+    <section id="model" class="work-section">
+        <h2>模型制作</h2>
+        <div class="work-grid">
+            <img src="assets/images/model-1.jpg" alt="模型作品1">
+            <img src="assets/images/model-2.jpg" alt="模型作品2">
+        </div>
+    </section>
+
+    <!-- 动画作品 -->
+    <section id="animate" class="work-section">
+        <h2>动画制作</h2>
+        <div class="work-grid">
+            <img src="assets/images/animate-1.gif" alt="动画作品1">
+            <img src="assets/images/animate-2.gif" alt="动画作品2">
+        </div>
+    </section>
+
+    <!-- UI作品 -->
+    <section id="ui" class="work-section">
+        <h2>UI设计</h2>
+        <div class="work-grid">
+            <img src="assets/images/ui-1.jpg" alt="UI作品1">
+            <img src="assets/images/ui-2.jpg" alt="UI作品2">
+        </div>
+    </section>
+
+    <!-- 视频作品 -->
+    <section id="video" class="work-section">
+        <h2>视频制作</h2>
+        <div class="work-grid">
+            <img src="assets/images/video-1.jpg" alt="视频作品1">
+            <img src="assets/images/video-2.jpg" alt="视频作品2">
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="contact">
+        <h2>联系我</h2>
+        <div class="contact-info">
+            <p>微信：18019997344</p>
+            <p>手机：18019997344</p>
+            <p>接单范围：模型 / 动画 / UI / 视频制作</p>
+        </div>
+    </section>
+
+    <!-- 留言系统 -->
+    <section id="message" class="message">
+        <h2>留言窗口</h2>
+        <div class="message-box">
+            <input type="text" id="name" placeholder="你的称呼">
+            <textarea id="content" placeholder="请留言..."></textarea>
+            <button onclick="saveMessage()">提交留言</button>
+        </div>
+        <div class="message-list" id="messageList"></div>
+    </section>
+
+    <!-- 底部答谢 -->
+    <footer class="footer">
+        <p>感谢你的信任与支持，我会用心做好每一个作品 | Jackmon</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
