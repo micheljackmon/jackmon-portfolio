@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>留言板 - Jackmon 三维视觉工作室</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="header">
+<div class="logo">
+  <img src="assets/images/logo.png" style="height: 48px;">
+</div>
+  <nav class="nav">
+    <a href="index.html">首页</a>
+    <a href="role.html">角色设计</a>
+    <a href="scene.html">场景空间设计</a>
+    <a href="product.html">产品宣传动画</a>
+    <a href="medical.html">医疗可视化</a>
+    <a href="interactive.html">交互动效</a>
+    <a href="edu.html">科普动画</a>
+    <a href="message.html">留言板</a>
+    <a href="contact.html">联系我</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>客户留言板</h1>
+</section>
+
+<div style="max-width: 700px; margin: 50px auto; padding: 0 20px;">
+  <!-- 留言表单 -->
+  <form id="messageForm" style="display: flex; flex-direction: column; gap: 16px;">
+    <div>
+      <label>您怎么称呼</label>
+      <input type="text" id="userName" required style="width:100%; padding:12px; background:#1c1c1c; border:1px solid #333; color:#fff; border-radius:6px;">
+    </div>
+    <div>
+      <label>您的联系方式</label>
+      <input type="text" id="userContact" required style="width:100%; padding:12px; background:#1c1c1c; border:1px solid #333; color:#fff; border-radius:6px;">
+    </div>
+    <div>
+      <label>留言内容</label>
+      <textarea id="userMessage" rows="5" required style="width:100%; padding:12px; background:#1c1c1c; border:1px solid #333; color:#fff; border-radius:6px;"></textarea>
+    </div>
+    <button type="submit" style="padding:14px; background:#0099ff; color:#fff; border:none; border-radius:6px; font-size:16px; cursor:pointer;">提交留言</button>
+  </form>
+
+  <!-- 留言展示区域 -->
+  <div style="margin-top: 60px;">
+    <h3 style="color:#fff; margin-bottom:20px;">已提交留言</h3>
+    <div id="messageList" style="display:flex; flex-direction:column; gap:16px;"></div>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-text">Jackmon 三维视觉工作室 · 承接商业定制项目</p>
+</footer>
+
+<script>
+// 储存留言用的本地数据库（永久保存，不会丢失）
+const STORAGE_KEY = "jackmon_messages";
+
+// 提交表单
+document.getElementById("messageForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("userName").value.trim();
+  const contact = document.getElementById("userContact").value.trim();
+  const content = document.getElementById("userMessage").value.trim();
+
+  if (!name || !contact || !content) return;
+
+  // 构造留言数据
+  const msg = {
+    id: Date.now(),
+    name,
+    contact,
+    content,
+    time: new Date().toLocaleString()
+  };
+
+  // 读取已有留言 → 追加新留言 → 保存
+  const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  list.unshift(msg); // 最新留言在最上面
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+
+  alert("留言提交成功！");
+  this.reset();
+  loadMessages();
+});
+
+// 加载并显示留言
+function loadMessages() {
+  const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  const container = document.getElementById("messageList");
+
+  container.innerHTML = list.map(item => `
+    <div style="padding:16px; background:#1c1c1c; border:1px solid #333; border-radius:8px;">
+      <div style="font-size:12px; color:#999; margin-bottom:8px;">${item.time}</div>
+      <div style="color:#fff; font-weight:500;">称呼：${item.name}</div>
+      <div style="color:#0099ff; margin:4px 0;">联系方式：${item.contact}</div>
+      <div style="color:#eee; white-space:pre-wrap; margin-top:8px;">${item.content}</div>
+    </div>
+  `).join("");
+}
+
+// 页面加载时显示留言
+loadMessages();
+</script>
+
+</body>
+</html>

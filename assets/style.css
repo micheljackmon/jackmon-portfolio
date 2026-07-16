@@ -1,151 +1,203 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
+/*body {
+  background: #111;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+}*/
 body {
-    background: #f5f7fa;
-    color: #2d2d2d;
-    line-height: 1.6;
+  font-size: 16px; /* 全站统一基础字号 */
+  color: #fff;
+  background: #0a0a0a;
 }
-
-/* 导航 */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #1a73e8;
-}
-
+/* 导航链接统一字号，所有页面导航文字强制一样大 */
 .nav a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
+  font-size: 24px;
+  text-decoration: none;
+  color: #fff;
+  margin: 0 12px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: #181818;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0099ff;
+}
+.nav a:hover {
+  color: #fff;
 }
 
-/* 欢迎区 */
 .hero {
-    text-align: center;
-    padding: 80px 20px;
-    background: linear-gradient(135deg, #1a73e8, #4285f4);
-    color: white;
+  padding: 60px 30px;
+  text-align: center;
+  background: #151515;
 }
-
 .hero h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
+  animation: fadeInUp 1s ease forwards;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.copyright-tip {
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+  padding: 10px 0;
 }
 
-.welcome, .thanks {
-    font-size: 18px;
-    margin: 10px 0;
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 30px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.card {
+  background: #1c1c1c;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  transition: 0.3s;
+  text-decoration: none;
+  color: #fff;
+}
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #222;
+}
+.card h3 {
+  padding: 12px;
+  font-size: 16px;
+}
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px #0099ff33;
 }
 
-/* 作品板块 */
-.work-section {
-    max-width: 1200px;
-    margin: 60px auto;
-    padding: 0 20px;
+/* 这里是修复后的底部文字 */
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.footer-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+.grid-8 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 30px 0;
+  max-width: 1500px;
+  margin: 0 auto !important; /* 加 !important 强制生效 */
+  width: 90%;
+}
+.work-item {
+  border-radius:8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #222;
+}
+.work-item img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  display: block;
+}
+.work-item vedio {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  display: block;
+}
+.work-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #fff2;
+}
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: modalFadeIn 0.3s ease;
+}
+.modal.show {
+  display: flex;
+}
+.modal-img {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  animation: modalZoomIn 0.3s ease;
+}
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-left {
+  left: 20px;
+}
+.modal-right {
+  right: 20px;
 }
 
-.work-section h2 {
-    font-size: 28px;
-    margin-bottom: 30px;
-    text-align: center;
-    color: #1a73e8;
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
-.work-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.work-grid img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: 0.3s;
-}
-
-.work-grid img:hover {
-    transform: translateY(-5px);
-}
-
-/* 联系 */
-.contact {
-    background: white;
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.contact h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-.contact-info p {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-/* 留言 */
-.message {
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 0 20px;
-}
-
-.message-box input, .message-box textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-.message-box button {
-    background: #1a73e8;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.message-list {
-    margin-top: 30px;
-}
-
-.message-item {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 10px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-/* 底部 */
-.footer {
-    text-align: center;
-    padding: 30px;
-    background: #f0f2f5;
-    margin-top: 40px;
+@keyframes modalZoomIn {
+  from { transform: scale(0.8); opacity: 0.7; }
+  to { transform: scale(1); opacity: 1; }
 }

@@ -1,41 +1,72 @@
-// 加载留言
-function loadMessages() {
-    let list = document.getElementById('messageList');
-    list.innerHTML = '';
-    let messages = JSON.parse(localStorage.getItem('jackmonMessages') || '[]');
-    
-    messages.forEach(item => {
-        let div = document.createElement('div');
-        div.className = 'message-item';
-        div.innerHTML = `
-            <strong>${item.name}</strong> · ${item.time}
-            <p>${item.content}</p>
-        `;
-        list.appendChild(div);
+let currentIndex = 0;
+let currentImages = [];
+let modal = null;
+let modalImg = null;
+
+document.addEventListener('DOMContentLoaded', function () {
+  // 创建弹窗
+  modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <div class="modal-close">×</div>
+    <div class="modal-arrow modal-left">←</div>
+    <div class="modal-arrow modal-right">→</div>
+    <img class="modal-img" />
+  `;
+  document.body.appendChild(modal);
+  modalImg = modal.querySelector('.modal-img');
+
+  // 关闭按钮
+  modal.querySelector('.modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+
+  // 左右箭头（只保留一次）
+  modal.querySelector('.modal-left').addEventListener('click', prevImg);
+  modal.querySelector('.modal-right').addEventListener('click', nextImg);
+
+  // 键盘切换
+  document.addEventListener('keydown', function (e) {
+    if (!modal.classList.contains('show')) return;
+    if (e.key === 'ArrowLeft') prevImg();
+    if (e.key === 'ArrowRight') nextImg();
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // 绑定当前页面的作品
+  initGallery();
+});
+
+function initGallery() {
+  const items = document.querySelectorAll('.work-item img');
+  currentImages = Array.from(items).map(img => img.src);
+
+  items.forEach((img, index) => {
+    img.parentElement.addEventListener('click', function () {
+      openModal(index);
     });
+  });
 }
 
-// 保存留言
-function saveMessage() {
-    let name = document.getElementById('name').value.trim();
-    let content = document.getElementById('content').value.trim();
-    
-    if(!name || !content) {
-        alert('请填写称呼和留言内容');
-        return;
-    }
-    
-    let time = new Date().toLocaleString();
-    let messages = JSON.parse(localStorage.getItem('jackmonMessages') || '[]');
-    
-    messages.unshift({ name, content, time });
-    localStorage.setItem('jackmonMessages', JSON.stringify(messages));
-    
-    document.getElementById('name').value = '';
-    document.getElementById('content').value = '';
-    loadMessages();
-    alert('留言成功！');
+function openModal(index) {
+  currentIndex = index;
+  modalImg.src = currentImages[currentIndex];
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
 
-// 页面加载时显示留言
-window.onload = loadMessages;
+function closeModal() {
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function prevImg() {
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  modalImg.src = currentImages[currentIndex];
+}
+
+function nextImg() {
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  modalImg.src = currentImages[currentIndex];
+}
