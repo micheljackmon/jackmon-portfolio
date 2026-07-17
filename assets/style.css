@@ -18,27 +18,35 @@ body {
 }
 @media (max-width: 768px) {
   .header {
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px 8px;
+    flex-direction: row;
+    align-items: flex-start; /* 全部元素顶部对齐 */
+    justify-content: space-between;
+    padding: 6px 8px;
+  }
+  /* 让logo图片紧贴顶部，无下沉留白 */
+  .logo {
+    margin-top: 0;
+    display: flex;
+    align-items: flex-start;
+  }
+  .logo img {
+    vertical-align: top;
+    display: block;
+    margin-top: 0;
   }
   .nav {
-    /* 垂直上下排列 */
-    display: flex;
-    flex-direction: column;
-    /* 整组导航容器贴页面右侧 */
-    margin-left: auto;
-    /* 链接上下间距 */
-    gap: 14px 0;
-    /* 限制宽度，不会撑满屏幕 */
-    width: fit-content;
-  }
+  display: flex;
+  flex-direction: column;
+  gap:7px 0;
+  width: fit-content;
+  margin-top: 40px; /* 导航整体往下挪，匹配logo高度 */
+}
   .nav a {
-    font-size: 16px;
-    margin:0;
-    text-decoration:none;
+    font-size: 14px;
+    text-align: right;
     color:#fff !important;
-    text-align: right; /* 单个文字自身靠右 */
+    text-decoration: none;
+    margin:0;
   }
   /* 网格、图片、视频所有移动端代码全部放这里 */
   .home-grid {
